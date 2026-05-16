@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- ===== PRIMARY BRAND - PURPLE THEME (matching reference) ===== -->
+    <color name="colorPrimary">#6C63FF</color>
+    <color name="colorPrimaryDark">#4A42D6</color>
+    <color name="colorPrimaryLight">#8B85FF</color>
+    <color name="colorAccent">#6C63FF</color>
+    <color name="colorAccentDark">#4A42D6</color>
+
+    <!-- ===== BACKGROUND & SURFACE ===== -->
+    <color name="colorBackground">#F5F5F5</color>
+    <color name="colorSurface">#FFFFFF</color>
+    <color name="colorCardBg">#FFFFFF</color>
+
+    <!-- ===== CATEGORY CARD COLORS (exactly matching reference icons) ===== -->
+    <color name="colorPhotos">#E91E8C</color>        <!-- Pink for Images -->
+    <color name="colorPhotosLight">#FCEEF6</color>
+    <color name="colorVideos">#F44336</color>         <!-- Red for Videos -->
+    <color name="colorVideosLight">#FFEBEE</color>
+    <color name="colorAudios">#FF9800</color>         <!-- Orange for Audio -->
+    <color name="colorAudiosLight">#FFF3E0</color>
+    <color name="colorOthers">#2196F3</color>         <!-- Blue for Other Files -->
+    <color name="colorOthersLight">#E3F2FD</color>
+
+    <!-- ===== ALBUM FOLDER ICON COLORS (matching reference screenshot) ===== -->
+    <color name="colorAlbumPink">#FF4F81</color>
+    <color name="colorAlbumOrange">#FF9800</color>
+    <color name="colorAlbumPurple">#7B52E0</color>
+    <color name="colorAlbumCyan">#00BCD4</color>
+    <color name="colorAlbumGreen">#4CAF50</color>
+    <color name="colorAlbumCoral">#FF6B6B</color>
+
+    <!-- ===== TEXT COLORS ===== -->
+    <color name="colorTextPrimary">#1A1A2E</color>
+    <color name="colorTextSecondary">#5F6368</color>
+    <color name="colorTextHint">#9E9E9E</color>
+    <color name="colorTextOnPrimary">#FFFFFF</color>
+
+    <!-- ===== ACTION COLORS ===== -->
+    <color name="colorRestore">#6C63FF</color>
+    <color name="colorRestoreLight">#EEF0FF</color>
+    <color name="colorScanBannerGradientStart">#7C4DFF</color>
+    <color name="colorScanBannerGradientEnd">#6C63FF</color>
+
+    <!-- ===== BOTTOM NAV ===== -->
+    <color name="colorNavActive">#6C63FF</color>
+    <color name="colorNavInactive">#9E9E9E</color>
+
+    <!-- ===== LEGACY (Keep for compatibility) ===== -->
+    <color name="purple_200">#6C63FF</color>
+    <color name="purple_500">#6C63FF</color>
+    <color name="purple_700">#4A42D6</color>
+    <color name="teal_200">#00BCD4</color>
+    <color name="teal_700">#0097A7</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+    <color name="md_grey_100">#F5F5F5</color>
+    <color name="md_grey_500">#9E9E9E</color>
+    <color name="colorRestoreButton">#6C63FF</color>
+    <color name="colorTextOnSurface">#1A1A2E</color>
+</resources>

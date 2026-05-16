@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F5F5F5"
+    tools:context=".activity.PhotosActivity">
+
+    <!-- ===== PREMIUM WHITE TOOLBAR ===== -->
+    <com.google.android.material.appbar.MaterialToolbar
+        android:id="@+id/toolBar"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize"
+        android:background="#FFFFFF"
+        android:elevation="2dp"
+        app:navigationIcon="@drawable/ic_back"
+        app:navigationIconTint="#1A1A2E"
+        app:title="Select Items to Restore"
+        app:titleTextColor="#1A1A2E"
+        app:titleTextAppearance="@style/ToolbarTitleStyle"/>
+
+    <!-- ===== PHOTO GRID ===== -->
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/gv_folder"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolBar"
+        android:layout_above="@id/bottomBar"
+        android:clipToPadding="false"
+        android:padding="6dp"
+        android:scrollbars="none"
+        android:overScrollMode="never"
+        app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+        app:spanCount="3"/>
+
+    <!-- ===== PREMIUM BOTTOM ACTION BAR ===== -->
+    <LinearLayout
+        android:id="@+id/bottomBar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_above="@id/adsView"
+        android:orientation="horizontal"
+        android:background="#FFFFFF"
+        android:elevation="12dp"
+        android:paddingHorizontal="16dp"
+        android:paddingVertical="12dp"
+        android:gravity="center_vertical"
+        android:weightSum="2">
+
+        <!-- Unselect Button (Outline Style) -->
+        <TextView
+            android:id="@+id/btnUnchecked"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginEnd="8dp"
+            android:background="@drawable/bg_btn_outline"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="UNSELECT ALL"
+            android:textColor="#5F6368"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"/>
+
+        <!-- Restore Button (Solid Gradient) -->
+        <TextView
+            android:id="@+id/btnRestore"
+            android:layout_width="0dp"
+            android:layout_height="48dp"
+            android:layout_weight="1"
+            android:layout_marginStart="8dp"
+            android:background="@drawable/bg_btn_restore"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground"
+            android:gravity="center"
+            android:text="RESTORE SELECTED"
+            android:textColor="@color/white"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:letterSpacing="0.05"/>
+    </LinearLayout>
+
+    <!-- ===== BANNER AD ===== -->
+    <FrameLayout
+        android:id="@+id/adsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="#FFFFFF"/>
+
+</RelativeLayout>

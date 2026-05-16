@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_banner_gradient"
+    tools:context=".activity.SplashActivity">
+
+    <!-- Decorative Circles -->
+    <View
+        android:layout_width="250dp"
+        android:layout_height="250dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="-80dp"
+        android:layout_marginEnd="-80dp"
+        android:background="#15FFFFFF"
+        android:importantForAccessibility="no"/>
+
+    <View
+        android:layout_width="200dp"
+        android:layout_height="200dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentStart="true"
+        android:layout_marginBottom="-60dp"
+        android:layout_marginStart="-60dp"
+        android:background="#15FFFFFF"
+        android:importantForAccessibility="no"/>
+
+    <View
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginBottom="100dp"
+        android:layout_marginEnd="30dp"
+        android:background="#10FFFFFF"
+        android:importantForAccessibility="no"/>
+
+    <!-- ===== CENTERED LOGO CONTENT ===== -->
+    <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <!-- Logo Badge Circle -->
+        <androidx.cardview.widget.CardView
+            android:layout_width="110dp"
+            android:layout_height="110dp"
+            android:layout_marginBottom="24dp"
+            app:cardCornerRadius="55dp"
+            app:cardElevation="16dp"
+            app:cardBackgroundColor="#FFFFFF">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/white">
+
+                <!-- Lottie animation inside circle -->
+                <com.airbnb.lottie.LottieAnimationView
+                    android:id="@+id/animation_view"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:padding="8dp"
+                    app:lottie_autoPlay="true"
+                    app:lottie_loop="true"
+                    app:lottie_rawRes="@raw/redar" />
+            </RelativeLayout>
+        </androidx.cardview.widget.CardView>
+
+        <!-- App Name -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Data Recovery"
+            android:textColor="@color/white"
+            android:textSize="30sp"
+            android:textStyle="bold"
+            android:fontFamily="sans-serif-medium"
+            android:letterSpacing="0.02"/>
+
+        <!-- Tagline -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Recover Your Precious Memories"
+            android:textColor="#CCE3FF"
+            android:textSize="14sp"
+            android:layout_marginTop="6dp"/>
+
+        <!-- Version badge -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="  PRO  "
+            android:textColor="@color/colorPrimary"
+            android:textSize="11sp"
+            android:textStyle="bold"
+            android:background="#FFFFFFFF"
+            android:paddingVertical="4dp"
+            android:paddingHorizontal="10dp"
+            android:layout_marginTop="12dp"/>
+    </LinearLayout>
+
+    <!-- Loading Indicator at bottom -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="60dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <ProgressBar
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:indeterminate="true"
+            android:indeterminateTint="@color/white"
+            style="?android:attr/progressBarStyle"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Initializing..."
+            android:textColor="#80FFFFFF"
+            android:textSize="12sp"
+            android:layout_marginTop="8dp"/>
+    </LinearLayout>
+
+</RelativeLayout>

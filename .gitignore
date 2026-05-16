@@ -1,0 +1,12 @@
+.idea/
+.vscode/
+PhotoRecovery_androidcode/.gradle/
+PhotoRecovery_androidcode/build/
+PhotoRecovery_androidcode/local.properties
+PhotoRecovery_androidcode/*.iml
+PhotoRecovery_androidcode/.cxx/
+PhotoRecovery_androidcode/.externalNativeBuild/
+PhotoRecovery_androidcode/captures/
+.DS_Store
+*.apk
+*.aar

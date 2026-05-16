@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    ALBUM CARD - Exactly matching reference screenshot:
+    [ColorSquare(icon+count)] | [AlbumName + 3 thumbnails] | [>]
+-->
+<androidx.cardview.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginHorizontal="12dp"
+    android:layout_marginVertical="5dp"
+    android:foreground="?attr/selectableItemBackground"
+    android:clickable="true"
+    android:focusable="true"
+    app:cardCornerRadius="16dp"
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="#FFFFFF">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:gravity="center_vertical"
+        android:padding="12dp">
+
+        <!-- ===== LEFT: Colored square folder box (icon + count + "Pictures") ===== -->
+        <LinearLayout
+            android:id="@+id/imageLayout"
+            android:layout_width="72dp"
+            android:layout_height="80dp"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:background="@color/colorPhotos"
+            android:padding="6dp"
+            android:layout_marginEnd="12dp">
+
+            <ImageView
+                android:layout_width="26dp"
+                android:layout_height="26dp"
+                android:src="@drawable/ic_cat_images"
+                android:tint="#FFFFFF"
+                android:layout_marginBottom="4dp"/>
+
+            <TextView
+                android:id="@+id/tv_folder2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:maxLines="2"
+                android:textColor="#FFFFFF"
+                android:textSize="11sp"
+                android:textStyle="bold"
+                android:text="0\nPictures"/>
+        </LinearLayout>
+
+        <!-- ===== MIDDLE: Album name (top) + thumbnails strip (bottom) ===== -->
+        <LinearLayout
+            android:id="@+id/lv_content"
+            android:layout_width="0dp"
+            android:layout_height="80dp"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_vertical">
+
+            <!-- Thumbnails horizontal strip -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_list"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:nestedScrollingEnabled="false"
+                android:clickable="false"
+                android:focusable="false"
+                android:overScrollMode="never"/>
+        </LinearLayout>
+
+        <!-- ===== RIGHT: Chevron ===== -->
+        <ImageView
+            android:id="@+id/im_arrow"
+            android:layout_width="20dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="8dp"
+            android:src="@drawable/ic_chevron_right"
+            app:tint="#BDBDBD"/>
+
+    </LinearLayout>
+</androidx.cardview.widget.CardView>

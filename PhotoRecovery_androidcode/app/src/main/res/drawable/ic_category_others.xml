@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Folder body -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M6,14 Q6,10 10,10 L20,10 L24,14 L42,14 Q42,14 42,18 L42,38 Q42,42 38,42 L10,42 Q6,42 6,38 Z"/>
+    <!-- Dot 1 -->
+    <path
+        android:fillColor="#00796B"
+        android:pathData="M13.5,28 A2.5,2.5 0 1,0 13.501,28 Z"/>
+    <!-- Dot 2 -->
+    <path
+        android:fillColor="#00796B"
+        android:pathData="M21.5,28 A2.5,2.5 0 1,0 21.501,28 Z"/>
+    <!-- Dot 3 -->
+    <path
+        android:fillColor="#00796B"
+        android:pathData="M29.5,28 A2.5,2.5 0 1,0 29.501,28 Z"/>
+    <!-- Bottom line -->
+    <path
+        android:fillColor="#00796B"
+        android:pathData="M14,32 L34,32 L34,34 L14,34 Z"/>
+</vector>

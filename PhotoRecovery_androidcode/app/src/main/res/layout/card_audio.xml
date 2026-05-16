@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:orientation="horizontal"
+    android:padding="6dp"
+    android:gravity="center_vertical">
+
+    <androidx.cardview.widget.CardView
+        android:id="@+id/album_card"
+        android:layout_width="0dp"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:foreground="?attr/selectableItemBackground"
+        android:clickable="true"
+        android:focusable="true"
+        app:cardCornerRadius="12dp"
+        app:cardElevation="3dp"
+        app:cardBackgroundColor="@color/white">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <!-- Purple left accent -->
+            <View
+                android:layout_width="5dp"
+                android:layout_height="match_parent"
+                android:layout_alignParentStart="true"
+                android:background="@color/colorAudios"/>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingStart="14dp"
+                android:paddingEnd="12dp"
+                android:paddingVertical="6dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <!-- Music icon -->
+                <LinearLayout
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:gravity="center"
+                    android:background="@drawable/bg_card_audios"
+                    android:layout_marginEnd="12dp">
+                    <ImageView
+                        android:layout_width="22dp"
+                        android:layout_height="22dp"
+                        android:src="@drawable/ic_category_audios"/>
+                </LinearLayout>
+
+                <LinearLayout
+                    android:id="@+id/linear_card_text"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:orientation="vertical">
+
+                    <TextView
+                        android:id="@+id/tvDate"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:maxLines="1"
+                        android:text="Audio Track Name"
+                        android:textColor="@color/colorTextPrimary"
+                        android:textSize="15sp"
+                        android:textStyle="bold"
+                        android:ellipsize="end"/>
+
+                    <TextView
+                        android:id="@+id/tvSize"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="2.4 MB"
+                        android:textColor="@color/colorTextSecondary"
+                        android:textSize="12sp"
+                        android:layout_marginTop="2dp"/>
+                </LinearLayout>
+
+                <ImageView
+                    android:layout_width="18dp"
+                    android:layout_height="18dp"
+                    android:src="@drawable/ic_chevron_right"
+                    app:tint="@color/colorTextSecondary"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <CheckBox
+        android:id="@+id/isChecked"
+        android:layout_width="42dp"
+        android:layout_height="42dp"
+        android:layout_gravity="center"
+        android:layout_marginStart="6dp"
+        android:button="@null"
+        android:background="?android:attr/listChoiceIndicatorMultiple"/>
+</LinearLayout>

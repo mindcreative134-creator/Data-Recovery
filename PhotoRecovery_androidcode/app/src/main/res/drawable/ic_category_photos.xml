@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="48dp"
+    android:height="48dp"
+    android:viewportWidth="48"
+    android:viewportHeight="48">
+    <!-- Image frame -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M4,8 Q4,4 8,4 L40,4 Q44,4 44,8 L44,36 Q44,40 40,40 L8,40 Q4,40 4,36 Z"/>
+    <!-- Mountain -->
+    <path
+        android:fillColor="#E91E63"
+        android:pathData="M4,30 L16,16 L24,24 L32,18 L44,30 L44,36 Q44,40 40,40 L8,40 Q4,40 4,36 Z"/>
+    <!-- Sun circle (as path arc) -->
+    <path
+        android:fillColor="#FF9800"
+        android:pathData="M34,9 A5,5 0 1,0 34.001,9 Z"/>
+</vector>

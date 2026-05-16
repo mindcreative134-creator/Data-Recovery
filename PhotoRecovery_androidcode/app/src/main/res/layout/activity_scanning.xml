@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_scan_screen"
+    tools:context=".activity.ScanningActivity">
+
+    <!-- ===== TOOLBAR ===== -->
+    <com.google.android.material.appbar.AppBarLayout
+        android:id="@+id/appbar"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:background="@android:color/transparent"
+        android:elevation="0dp">
+
+        <com.google.android.material.appbar.MaterialToolbar
+            android:id="@+id/toolBar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="@android:color/transparent"
+            app:title="Scanning..."
+            app:titleTextColor="@color/colorPrimary"
+            app:navigationIcon="@drawable/ic_back"
+            app:navigationIconTint="@color/colorPrimary" />
+    </com.google.android.material.appbar.AppBarLayout>
+
+    <!-- ===== MAIN CONTENT ===== -->
+    <RelativeLayout
+        android:id="@+id/ll1"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/appbar"
+        android:layout_above="@id/adsView">
+
+        <!-- Title Text -->
+        <LinearLayout
+            android:id="@+id/titleLayout"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scanning Device"
+                android:textColor="@color/colorPrimary"
+                android:textSize="26sp"
+                android:textStyle="bold"
+                android:fontFamily="sans-serif-medium"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Please wait while we find deleted files..."
+                android:textColor="@color/colorTextSecondary"
+                android:textSize="13sp"
+                android:layout_marginTop="4dp"/>
+        </LinearLayout>
+
+        <!-- ===== LIVE COUNT CARDS ===== -->
+        <LinearLayout
+            android:id="@+id/ll_counts"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center"
+            android:layout_below="@id/titleLayout"
+            android:layout_marginTop="20dp"
+            android:layout_marginHorizontal="16dp"
+            android:weightSum="4">
+
+            <!-- Photos Count -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_card_photos"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_category_photos"/>
+                <TextView
+                    android:id="@+id/noOfImage"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Photos"
+                    android:textColor="#FFD0DE"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <!-- Videos Count -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_card_videos"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_category_videos"/>
+                <TextView
+                    android:id="@+id/noOfVideo"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Videos"
+                    android:textColor="#FFE0B2"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <!-- Audios Count -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_card_audios"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_category_audios"/>
+                <TextView
+                    android:id="@+id/noOfAudio"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Audios"
+                    android:textColor="#E1BEE7"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+
+            <!-- Others Count -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginHorizontal="4dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:background="@drawable/bg_card_others"
+                android:padding="10dp">
+                <ImageView
+                    android:layout_width="28dp"
+                    android:layout_height="28dp"
+                    android:src="@drawable/ic_category_others"/>
+                <TextView
+                    android:id="@+id/noOfOthers"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="0"
+                    android:textColor="@color/white"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:layout_marginTop="4dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Others"
+                    android:textColor="#B2DFDB"
+                    android:textSize="10sp"/>
+            </LinearLayout>
+        </LinearLayout>
+
+        <!-- ===== RADAR / LOTTIE ANIMATION ===== -->
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/ll_counts"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp">
+
+            <com.airbnb.lottie.LottieAnimationView
+                android:id="@+id/animation_view"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_margin="24dp"
+                app:lottie_autoPlay="true"
+                app:lottie_loop="true"
+                app:lottie_rawRes="@raw/redar1" />
+
+            <!-- Scanning Label overlay at bottom of animation -->
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginBottom="16dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:background="#EEFFFFFF"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+                <View
+                    android:layout_width="8dp"
+                    android:layout_height="8dp"
+                    android:background="@color/colorPrimary"
+                    android:layout_marginEnd="8dp"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Deep Scanning Storage..."
+                    android:textColor="@color/colorPrimary"
+                    android:textSize="14sp"
+                    android:textStyle="italic"/>
+            </LinearLayout>
+        </RelativeLayout>
+    </RelativeLayout>
+
+    <!-- ===== BANNER AD ===== -->
+    <FrameLayout
+        android:id="@+id/adsView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:background="@color/colorSurface"/>
+
+</RelativeLayout>
