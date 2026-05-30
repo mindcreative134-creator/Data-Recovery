@@ -42,7 +42,8 @@ public class AlbumActivity extends AppCompatActivity implements AlbumsImageAdapt
         intView();
         setSupportActionBar(toolBar);
         intData(mAlbumPhotos);
-        new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
+        // Banner ad removed from inner screen — AdMob policy: avoid more ads than content
+        // new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
     }
 
     public void intView() {

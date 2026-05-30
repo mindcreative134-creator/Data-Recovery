@@ -40,6 +40,13 @@ public class AdmobAdsModel {
     static InterstitialAd mInterstitialAd;
     String mTag = "AdmobAdsModel";
 
+    // Frequency capping: show interstitial every N navigation actions
+    private static final int INTERSTITIAL_FREQUENCY = 3;
+    static int navClickCount = 0;
+
+    // Flag used by AppOpenManager to avoid stacking App Open Ad on top of Interstitial
+    public static boolean isInterstitialShowing = false;
+
     public AdmobAdsModel(Context context) {
         this.context = context;
     }
@@ -124,13 +131,25 @@ public class AdmobAdsModel {
 
     public void interstitialAdShow(Activity context, final GetBackPointer getBackPointer) {
 
+        // Frequency capping: only show interstitial every INTERSTITIAL_FREQUENCY taps
+        navClickCount++;
+        if (navClickCount % INTERSTITIAL_FREQUENCY != 0) {
+            Log.d(mTag, "interstitialAdShow: skipped (count=" + navClickCount + ")");
+            if (getBackPointer != null) {
+                getBackPointer.returnAction();
+            }
+            return;
+        }
+
         if (mInterstitialAd != null) {
+            isInterstitialShowing = true;
             mInterstitialAd.show(context);
 
             mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {
                 @Override
                 public void onAdFailedToShowFullScreenContent(@NonNull AdError adError) {
                     super.onAdFailedToShowFullScreenContent(adError);
+                    isInterstitialShowing = false;
                     Log.d(mTag, "onAdFailedToShowFullScreenContent: " + adError.getMessage());
                 }
 
@@ -138,12 +157,12 @@ public class AdmobAdsModel {
                 public void onAdShowedFullScreenContent() {
                     super.onAdShowedFullScreenContent();
                     Log.d(mTag, "onAdShowedFullScreenContent: ");
-
                 }
 
                 @Override
                 public void onAdDismissedFullScreenContent() {
                     super.onAdDismissedFullScreenContent();
+                    isInterstitialShowing = false;
                     Log.d(mTag, "onAdDismissedFullScreenContent: ");
                     interstitialAdLoad(context);
                     if (getBackPointer != null) {

@@ -44,7 +44,8 @@ public class VideoActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_video);
 
-        new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
+        // Banner ad removed from inner screen — AdMob policy: avoid more ads than content
+        // new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
         intView();
         intData();
     }

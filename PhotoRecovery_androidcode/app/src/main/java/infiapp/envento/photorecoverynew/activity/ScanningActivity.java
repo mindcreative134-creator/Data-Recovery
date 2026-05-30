@@ -24,7 +24,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import infiapp.envento.photorecoverynew.ads.AdmobAdsModel;
 import infiapp.envento.photorecoverynew.model.AlbumAudio;
 import infiapp.envento.photorecoverynew.model.AlbumOthers;
 import infiapp.envento.photorecoverynew.model.AlbumPhoto;
@@ -57,7 +56,8 @@ public class ScanningActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_scanning);
 
-        new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
+        // No banner ad on scanning screen — user is locked here while scan runs,
+        // showing an ad on this screen violates AdMob's "more ads than content" policy.
         noOfImage = findViewById(R.id.noOfImage);
         noOfVideo = findViewById(R.id.noOfVideo);
         noOfAudio = findViewById(R.id.noOfAudio);
@@ -113,7 +113,6 @@ public class ScanningActivity extends AppCompatActivity {
             Collections.sort(mAlbumPhotos, new Comparator<AlbumPhoto>() {
                 @Override
                 public int compare(AlbumPhoto lhs, AlbumPhoto rhs) {
-
                     return Long.valueOf(rhs.getLastModified()).compareTo(lhs.getLastModified());
                 }
             });
@@ -150,21 +149,10 @@ public class ScanningActivity extends AppCompatActivity {
         protected void onPostExecute(ArrayList<AlbumPhoto> albumPhotos) {
             super.onPostExecute(albumPhotos);
 
-            /*
-             * if (mAlbumPhotos.size() == 0) {
-             * Intent intent = new Intent(getApplicationContext(), NoFileActiviy.class);
-             * startActivity(intent);
-             * } else {
-             * Intent intent = new Intent(getApplicationContext(), AlbumActivity.class);
-             * startActivity(intent);
-             * }
-             */
-
             Toast.makeText(ScanningActivity.this, "All files have been scanned", Toast.LENGTH_SHORT).show();
-            // if (mAlbumPhotos.size() != 0) {
-            Intent intent = new Intent(getApplicationContext(), MainActivity.class);
+            Intent intent = new Intent(getApplicationContext(), ScanResultActivity.class);
             startActivity(intent);
-            // }
+            finish();
         }
 
         public void checkFileOfDirectory(String temp, File[] fileArr) {
@@ -232,12 +220,10 @@ public class ScanningActivity extends AppCompatActivity {
                 Collections.sort(listPhoto, new Comparator<PhotoModel>() {
                     @Override
                     public int compare(PhotoModel lhs, PhotoModel rhs) {
-
                         return Long.valueOf(rhs.getLastModified()).compareTo(lhs.getLastModified());
                     }
                 });
                 obj_model.setListPhoto((ArrayList<PhotoModel>) listPhoto.clone());
-
                 mAlbumPhotos.add(obj_model);
             }
             listPhoto.clear();
@@ -245,18 +231,15 @@ public class ScanningActivity extends AppCompatActivity {
             if (listVideo.size() != 0 && !temp.contains(Config.RECOVER_DIRECTORY)) {
 
                 AlbumVideo obj_model = new AlbumVideo();
-
                 obj_model.setStrVideoFolder(temp);
                 obj_model.setLastVideoModified(new File(temp).lastModified());
                 Collections.sort(listVideo, new Comparator<VideoModel>() {
                     @Override
                     public int compare(VideoModel lhs, VideoModel rhs) {
-
                         return Long.valueOf(rhs.getLastModifiedVideo()).compareTo(lhs.getLastModifiedVideo());
                     }
                 });
                 obj_model.setListVideo((ArrayList<VideoModel>) listVideo.clone());
-
                 mAlbumVideos.add(obj_model);
             }
             listVideo.clear();
@@ -264,7 +247,6 @@ public class ScanningActivity extends AppCompatActivity {
             if (listAudio.size() != 0 && !temp.contains(Config.RECOVER_DIRECTORY)) {
 
                 AlbumAudio albumAudio = new AlbumAudio();
-
                 albumAudio.setStrAudioFolder(temp);
                 albumAudio.setLastAudioModified(new File(temp).lastModified());
 
@@ -276,7 +258,6 @@ public class ScanningActivity extends AppCompatActivity {
                 });
 
                 albumAudio.setListAudio((ArrayList<AudioModel>) listAudio.clone());
-
                 mAlbumAudios.add(albumAudio);
             }
             listAudio.clear();
@@ -284,7 +265,6 @@ public class ScanningActivity extends AppCompatActivity {
             if (listOther.size() != 0 && !temp.contains(Config.RECOVER_DIRECTORY)) {
 
                 AlbumOthers albumOthers = new AlbumOthers();
-
                 albumOthers.setStrOtherFolder(temp);
                 albumOthers.setLastAudioModified(new File(temp).lastModified());
 
@@ -296,7 +276,6 @@ public class ScanningActivity extends AppCompatActivity {
                 });
 
                 albumOthers.setListOther((ArrayList<OtherModel>) listOther.clone());
-
                 mAlbumOthers.add(albumOthers);
             }
             listOther.clear();
@@ -307,7 +286,6 @@ public class ScanningActivity extends AppCompatActivity {
             String[] externalStoragePaths = getExternalStorageDirectories();
 
             if (externalStoragePaths != null && externalStoragePaths.length > 0) {
-
                 for (String path : externalStoragePaths) {
                     File file = new File(path);
                     if (file.exists()) {
@@ -361,10 +339,9 @@ public class ScanningActivity extends AppCompatActivity {
                         try {
                             is.close();
                         } catch (IOException e2) {
-
+                            // ignore
                         }
                     }
-
                 }
                 if (!output.trim().isEmpty()) {
                     String[] devicePoints = output.split(IOUtils.LINE_SEPARATOR_UNIX);

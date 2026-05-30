@@ -21,18 +21,17 @@
             android:layout_height="?attr/actionBarSize"
             android:background="@android:color/transparent"
             app:title="Scanning..."
-            app:titleTextColor="@color/colorPrimary"
+            app:titleTextColor="@color/colorPrimaryLight"
             app:navigationIcon="@drawable/ic_back"
-            app:navigationIconTint="@color/colorPrimary" />
+            app:navigationIconTint="@color/colorPrimaryLight" />
     </com.google.android.material.appbar.AppBarLayout>
 
-    <!-- ===== MAIN CONTENT ===== -->
+    <!-- ===== MAIN CONTENT (no ads — policy compliant) ===== -->
     <RelativeLayout
         android:id="@+id/ll1"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@id/appbar"
-        android:layout_above="@id/adsView">
+        android:layout_below="@id/appbar">
 
         <!-- Title Text -->
         <LinearLayout
@@ -48,7 +47,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Scanning Device"
-                android:textColor="@color/colorPrimary"
+                android:textColor="@color/colorTextPrimary"
                 android:textSize="26sp"
                 android:textStyle="bold"
                 android:fontFamily="sans-serif-medium"/>
@@ -87,7 +86,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_category_photos"/>
+                    android:src="@drawable/ic_cat_images"
+                    android:tint="@color/white"/>
                 <TextView
                     android:id="@+id/noOfImage"
                     android:layout_width="wrap_content"
@@ -101,7 +101,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Photos"
-                    android:textColor="#FFD0DE"
+                    android:textColor="#FFD0E8"
                     android:textSize="10sp"/>
             </LinearLayout>
 
@@ -118,7 +118,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_category_videos"/>
+                    android:src="@drawable/ic_cat_videos"
+                    android:tint="@color/white"/>
                 <TextView
                     android:id="@+id/noOfVideo"
                     android:layout_width="wrap_content"
@@ -132,7 +133,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Videos"
-                    android:textColor="#FFE0B2"
+                    android:textColor="#FFD0D0"
                     android:textSize="10sp"/>
             </LinearLayout>
 
@@ -149,7 +150,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_category_audios"/>
+                    android:src="@drawable/ic_cat_audio"
+                    android:tint="@color/white"/>
                 <TextView
                     android:id="@+id/noOfAudio"
                     android:layout_width="wrap_content"
@@ -163,7 +165,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Audios"
-                    android:textColor="#E1BEE7"
+                    android:textColor="#FFE8C0"
                     android:textSize="10sp"/>
             </LinearLayout>
 
@@ -180,7 +182,8 @@
                 <ImageView
                     android:layout_width="28dp"
                     android:layout_height="28dp"
-                    android:src="@drawable/ic_category_others"/>
+                    android:src="@drawable/ic_cat_others"
+                    android:tint="@color/white"/>
                 <TextView
                     android:id="@+id/noOfOthers"
                     android:layout_width="wrap_content"
@@ -194,12 +197,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Others"
-                    android:textColor="#B2DFDB"
+                    android:textColor="#C0E8FF"
                     android:textSize="10sp"/>
             </LinearLayout>
         </LinearLayout>
 
-        <!-- ===== RADAR / LOTTIE ANIMATION ===== -->
+        <!-- ===== RADAR ANIMATION ===== -->
         <RelativeLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -216,40 +219,34 @@
                 app:lottie_loop="true"
                 app:lottie_rawRes="@raw/redar1" />
 
-            <!-- Scanning Label overlay at bottom of animation -->
+            <!-- Scanning Label -->
             <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
                 android:layout_centerHorizontal="true"
-                android:layout_marginBottom="16dp"
+                android:layout_marginBottom="24dp"
                 android:orientation="horizontal"
                 android:gravity="center_vertical"
-                android:background="#EEFFFFFF"
-                android:paddingHorizontal="16dp"
-                android:paddingVertical="8dp">
+                android:background="#CC1A1A2E"
+                android:paddingHorizontal="18dp"
+                android:paddingVertical="10dp">
                 <View
                     android:layout_width="8dp"
                     android:layout_height="8dp"
                     android:background="@color/colorPrimary"
-                    android:layout_marginEnd="8dp"/>
+                    android:layout_marginEnd="10dp"/>
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Deep Scanning Storage..."
-                    android:textColor="@color/colorPrimary"
+                    android:textColor="@color/colorPrimaryLight"
                     android:textSize="14sp"
                     android:textStyle="italic"/>
             </LinearLayout>
         </RelativeLayout>
     </RelativeLayout>
 
-    <!-- ===== BANNER AD ===== -->
-    <FrameLayout
-        android:id="@+id/adsView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
-        android:background="@color/colorSurface"/>
+    <!-- NO BANNER AD on scanning screen — policy compliant -->
 
 </RelativeLayout>

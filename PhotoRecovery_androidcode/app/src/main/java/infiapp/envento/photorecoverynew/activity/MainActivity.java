@@ -44,7 +44,8 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        new AdmobAdsModel(this).interstitialAdLoad(this);
+        // NOTE: Interstitial is loaded only in onCreate to avoid reloading on every screen return.
+        // Reloading here (onResume) caused too-frequent ad display — AdMob policy violation.
         super.onResume();
     }
 
@@ -53,6 +54,8 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        // Load interstitial once at startup only
+        new AdmobAdsModel(this).interstitialAdLoad(this);
         new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
         // new AdmobAdsModel(this).nativeAds(this, findViewById(R.id.adsView));
 

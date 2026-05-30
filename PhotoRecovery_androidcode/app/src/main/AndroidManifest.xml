@@ -42,6 +42,7 @@
         <activity android:name="infiapp.envento.photorecoverynew.activity.VideoAlbumActivity" />
         <activity android:name="infiapp.envento.photorecoverynew.activity.AlbumActivity" />
         <activity android:name="infiapp.envento.photorecoverynew.activity.ScanningActivity" />
+        <activity android:name="infiapp.envento.photorecoverynew.activity.ScanResultActivity" />
 
         <provider
             android:name="androidx.core.content.FileProvider"

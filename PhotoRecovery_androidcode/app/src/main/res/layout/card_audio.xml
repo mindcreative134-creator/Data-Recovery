@@ -49,7 +49,7 @@
                     <ImageView
                         android:layout_width="22dp"
                         android:layout_height="22dp"
-                        android:src="@drawable/ic_category_audios"/>
+                        android:src="@drawable/ic_cat_audio"/>
                 </LinearLayout>
 
                 <LinearLayout

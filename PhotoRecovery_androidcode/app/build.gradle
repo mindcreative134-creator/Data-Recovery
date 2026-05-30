@@ -8,10 +8,10 @@ android {
 
     defaultConfig {
         applicationId "com.recovery.photodeleted.data"
-        minSdk 26
+        minSdk 21          // Changed from 26 → 21 to reach more devices on Play Store
         targetSdk 35
-        versionCode 4
-        versionName "1.3"
+        versionCode 5      // Bumped for new Play Store upload
+        versionName "1.4"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -53,6 +53,7 @@ dependencies {
 
     implementation 'com.karumi:dexter:6.2.3'
 
-    implementation 'com.google.android.gms:play-services-ads:22.6.0'
+    // AdMob — updated to latest stable (23.x) as required by AdMob policy
+    implementation 'com.google.android.gms:play-services-ads:23.2.0'
     implementation 'androidx.lifecycle:lifecycle-process:2.6.2'
 }

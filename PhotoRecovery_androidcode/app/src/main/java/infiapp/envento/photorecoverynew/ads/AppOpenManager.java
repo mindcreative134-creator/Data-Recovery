@@ -18,6 +18,7 @@ import com.google.android.gms.ads.appopen.AppOpenAd;
 import java.util.Date;
 
 import infiapp.envento.photorecoverynew.activity.MyApplication;
+import infiapp.envento.photorecoverynew.ads.AdmobAdsModel;
 
 import static androidx.lifecycle.Lifecycle.Event.ON_START;
 /**
@@ -145,9 +146,9 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
     }
 
     public void showAdIfAvailable() {
-        // Only show ad if there is not already an app open ad currently showing
-        // and an ad is available.
-        if (!isShowingAd && isAdAvailable()) {
+        // Only show ad if there is not already an app open ad currently showing,
+        // an ad is available, and an interstitial is not currently/recently showing.
+        if (!isShowingAd && isAdAvailable() && !AdmobAdsModel.isInterstitialShowing) {
             Log.d(LOG_TAG, "Will show ad.");
 
             FullScreenContentCallback fullScreenContentCallback =

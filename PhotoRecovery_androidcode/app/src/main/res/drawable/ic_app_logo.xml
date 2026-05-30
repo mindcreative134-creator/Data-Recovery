@@ -4,29 +4,16 @@
     android:height="64dp"
     android:viewportWidth="64"
     android:viewportHeight="64">
-    <!-- Shield body -->
+    <!-- Outer glowing circle or shield -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M32,4 L8,14 L8,36 C8,50 20,60 32,64 C44,60 56,50 56,36 L56,14 Z"/>
-    <!-- Shield gradient overlay -->
-    <path
-        android:fillColor="#20FFFFFF"
-        android:pathData="M32,8 L12,17 L12,36 C12,48 22,57 32,60 C42,57 52,48 52,36 L52,17 Z"/>
-    <!-- Magnifier circle -->
-    <path
-        android:fillColor="#1565C0"
-        android:pathData="M26,20 A8,8 0 1,1 26.001,20 Z"/>
-    <!-- Magnifier handle -->
-    <path
-        android:fillColor="#1565C0"
-        android:strokeColor="#1565C0"
-        android:strokeWidth="2"
-        android:pathData="M32,28 L40,36"/>
-    <!-- Image icon in magnifier -->
+        android:pathData="M32,2C15.43,2 2,15.43 2,32C2,48.57 15.43,62 32,62C48.57,62 62,48.57 62,32C62,15.43 48.57,2 32,2ZM32,56C18.77,56 8,45.23 8,32C8,18.77 18.77,8 32,8C45.23,8 56,18.77 56,32C56,45.23 45.23,56 32,56Z"/>
+    <!-- Recovery circular arrows inside -->
     <path
         android:fillColor="#FFFFFF"
-        android:pathData="M22,22 L30,22 L30,30 L22,30 Z"/>
+        android:pathData="M32,14C23.16,14 16,21.16 16,30H20C20,23.37 25.37,18 32,18C38.63,18 44,23.37 44,30C44,36.63 38.63,42 32,42C28.37,42 25.13,40.38 23,37.8L20.1,40.7C23.03,44 27.28,46 32,46C40.84,46 48,38.84 48,30C48,21.16 40.84,14 32,14Z"/>
+    <!-- Folded folder in the absolute center -->
     <path
-        android:fillColor="#1565C0"
-        android:pathData="M23,27 L25,24 L27,27 L29,25 L30,27 L30,30 L22,30 Z"/>
+        android:fillColor="#FFFFFF"
+        android:pathData="M37,25H32L30,23H27C25.9,23 25,23.9 25,25V35C25,36.1 25.9,37 27,37H37C38.1,37 39,36.1 39,35V27C39,25.9 38.1,25 37,25ZM37,35H27V27H37V35Z"/>
 </vector>

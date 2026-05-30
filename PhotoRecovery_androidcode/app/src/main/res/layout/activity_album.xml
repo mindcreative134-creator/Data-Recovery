@@ -38,14 +38,15 @@
         android:paddingBottom="8dp"
         android:scrollbars="none"
         android:overScrollMode="never"
+        android:background="@color/colorBackground"
         app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" />
 
-    <!-- ===== BANNER AD ===== -->
+    <!-- ===== BANNER AD (policy-compliant: interactive content screen) ===== -->
     <FrameLayout
         android:id="@+id/adsView"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
-        android:background="@color/colorSurface"/>
+        android:background="@color/colorNavBackground"/>
 
 </RelativeLayout>
