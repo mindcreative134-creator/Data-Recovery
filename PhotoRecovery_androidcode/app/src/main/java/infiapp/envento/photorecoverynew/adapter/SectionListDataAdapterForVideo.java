@@ -61,7 +61,8 @@ public class SectionListDataAdapterForVideo
                     .asBitmap()
                     .load("file://" + singleItem.getPathVideo())
                     .override(50, 50)
-                    .error(R.drawable.ic_error)
+                    .placeholder(R.drawable.ic_cat_videos)
+                    .error(R.drawable.ic_cat_videos)
                     .into(holder.itemImage);
         } catch (Exception e) {
             // do nothing

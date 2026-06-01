@@ -42,6 +42,15 @@ public class AlbumsVideoAdapter extends RecyclerView.Adapter<AlbumsVideoAdapter.
     public void onBindViewHolder(@NonNull AlbumsVideoAdapter.MyViewHolder holder, int position) {
 
         holder.mVideoFileSize.setText("" + albumVideos.get(position).getListVideo().size() + "\nVideos");
+        
+        // Dynamically style folder box to be Red (Video category) and set Video Camera icon
+        if (holder.mFolderIcon != null) {
+            holder.mFolderIcon.setBackgroundResource(R.drawable.bg_card_videos);
+        }
+        if (holder.ivFolderIcon != null) {
+            holder.ivFolderIcon.setImageResource(R.drawable.ic_cat_videos);
+        }
+
         ArrayList<VideoModel> singleSectionItems = albumVideos.get(position).getListVideo();
 
         SectionListDataAdapterForVideo itemListDataAdapter = new SectionListDataAdapterForVideo(context,
@@ -65,12 +74,16 @@ public class AlbumsVideoAdapter extends RecyclerView.Adapter<AlbumsVideoAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mVideoFileSize;
         RecyclerView mVideoListView;
+        android.widget.LinearLayout mFolderIcon;
+        android.widget.ImageView ivFolderIcon;
         OnClickItemListener onClickItemListener;
 
         public MyViewHolder(View view, OnClickItemListener onClickItemListener) {
             super(view);
             this.mVideoListView = (RecyclerView) view.findViewById(R.id.recycler_view_list);
             mVideoFileSize = (TextView) view.findViewById(R.id.tv_folder2);
+            mFolderIcon = view.findViewById(R.id.imageLayout);
+            ivFolderIcon = view.findViewById(R.id.iv_folder_icon);
             this.onClickItemListener = onClickItemListener;
             view.setOnClickListener(this);
 

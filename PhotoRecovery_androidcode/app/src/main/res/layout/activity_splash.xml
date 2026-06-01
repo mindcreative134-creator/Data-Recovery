@@ -60,15 +60,14 @@
                 android:layout_height="match_parent"
                 android:background="#1A1A2E">
 
-                <!-- Lottie animation inside circle -->
-                <com.airbnb.lottie.LottieAnimationView
-                    android:id="@+id/animation_view"
+                <!-- Premium App Launcher Icon -->
+                <ImageView
+                    android:id="@+id/ivSplashLogo"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:padding="10dp"
-                    app:lottie_autoPlay="true"
-                    app:lottie_loop="true"
-                    app:lottie_rawRes="@raw/redar" />
+                    android:padding="16dp"
+                    android:src="@mipmap/ic_launcher"
+                    android:scaleType="fitCenter" />
             </RelativeLayout>
         </androidx.cardview.widget.CardView>
 

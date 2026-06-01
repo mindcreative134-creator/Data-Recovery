@@ -7,6 +7,10 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Environment;
 import android.util.Log;
+import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -50,6 +54,8 @@ public class ScanningActivity extends AppCompatActivity {
     ArrayList<OtherModel> listOther = new ArrayList<>();
 
     TextView noOfImage, noOfVideo, noOfAudio, noOfOthers;
+    LinearLayout cardPhotos, cardVideos, cardAudios, cardOthers;
+    View pulseDot;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -63,19 +69,56 @@ public class ScanningActivity extends AppCompatActivity {
         noOfAudio = findViewById(R.id.noOfAudio);
         noOfOthers = findViewById(R.id.noOfOthers);
 
+        // Stat cards for staggered entrance animation
+        cardPhotos = findViewById(R.id.cardPhotos);
+        cardVideos = findViewById(R.id.cardVideos);
+        cardAudios = findViewById(R.id.cardAudios);
+        cardOthers = findViewById(R.id.cardOthers);
+        pulseDot   = findViewById(R.id.pulseDot);
+
         MaterialToolbar toolbar = findViewById(R.id.toolBar);
         toolbar.setNavigationOnClickListener(v -> {
             onBackPressed();
         });
 
+        // ===== Neon Recovery Animations =====
+        startScanAnimations();
+
         mScanImagesAsyncTask = new ScanImagesAsyncTask();
         mScanImagesAsyncTask.execute();
+    }
 
-        /*
-         * android.provider.Settings.System.putInt(getContentResolver(),
-         * Settings.System.SCREEN_OFF_TIMEOUT, -1);
-         */
+    /**
+     * Starts the staggered slide-up + fade-in animation for the 4 stat cards
+     * and a heartbeat pulse for the glowing status dot.
+     */
+    private void startScanAnimations() {
+        Animation slideUp = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
 
+        // Stagger: each card starts 120ms after the previous
+        cardPhotos.setVisibility(View.VISIBLE);
+        cardPhotos.startAnimation(slideUp);
+
+        Animation slideUp2 = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
+        slideUp2.setStartOffset(120);
+        cardVideos.setVisibility(View.VISIBLE);
+        cardVideos.startAnimation(slideUp2);
+
+        Animation slideUp3 = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
+        slideUp3.setStartOffset(240);
+        cardAudios.setVisibility(View.VISIBLE);
+        cardAudios.startAnimation(slideUp3);
+
+        Animation slideUp4 = AnimationUtils.loadAnimation(this, R.anim.slide_up_fade_in);
+        slideUp4.setStartOffset(360);
+        cardOthers.setVisibility(View.VISIBLE);
+        cardOthers.startAnimation(slideUp4);
+
+        // Heartbeat pulse on the glowing dot
+        if (pulseDot != null) {
+            Animation heartbeat = AnimationUtils.loadAnimation(this, R.anim.heartbeat_pulse);
+            pulseDot.startAnimation(heartbeat);
+        }
     }
 
     @Override
@@ -148,6 +191,15 @@ public class ScanningActivity extends AppCompatActivity {
         @Override
         protected void onPostExecute(ArrayList<AlbumPhoto> albumPhotos) {
             super.onPostExecute(albumPhotos);
+
+            // Persist scan counts in SharedPreferences to prevent them from resetting to 0
+            android.content.SharedPreferences prefs = getSharedPreferences("data_recovery_prefs", MODE_PRIVATE);
+            android.content.SharedPreferences.Editor editor = prefs.edit();
+            editor.putString("noOfImage", Utils.noOfImage);
+            editor.putString("noOfVideo", Utils.noOfVideo);
+            editor.putString("noOfAudio", Utils.noOfAudio);
+            editor.putString("noOfOther", Utils.noOfOther);
+            editor.apply();
 
             Toast.makeText(ScanningActivity.this, "All files have been scanned", Toast.LENGTH_SHORT).show();
             Intent intent = new Intent(getApplicationContext(), ScanResultActivity.class);

@@ -34,6 +34,10 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
     private final MyApplication myApplication;
     private long loadTime = 0;
 
+    // Minimum gap between App Open Ad shows: 4 hours (AdMob policy — avoid ad overload)
+    private static final long APP_OPEN_AD_MIN_INTERVAL_MS = 4 * 60 * 60 * 1000L;
+    private static long lastAppOpenAdShownTime = 0;
+
     /**
      * Constructor
      */
@@ -148,7 +152,17 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
     public void showAdIfAvailable() {
         // Only show ad if there is not already an app open ad currently showing,
         // an ad is available, and an interstitial is not currently/recently showing.
-        if (!isShowingAd && isAdAvailable() && !AdmobAdsModel.isInterstitialShowing) {
+        // Also enforce 4-hour minimum gap between App Open Ad shows (AdMob policy)
+        long now = System.currentTimeMillis();
+        boolean enoughTimePassed = (now - lastAppOpenAdShownTime) >= APP_OPEN_AD_MIN_INTERVAL_MS;
+
+        // Skip App Open ads on Splash screen to prevent conflict with transitions
+        if (currentActivity != null && currentActivity.getClass().getSimpleName().equals("SplashActivity")) {
+            Log.d(LOG_TAG, "On splash screen, skipping app open ad.");
+            return;
+        }
+
+        if (!isShowingAd && isAdAvailable() && !AdmobAdsModel.isInterstitialShowing && enoughTimePassed) {
             Log.d(LOG_TAG, "Will show ad.");
 
             FullScreenContentCallback fullScreenContentCallback =
@@ -170,6 +184,7 @@ public class AppOpenManager implements LifecycleObserver, Application.ActivityLi
                         @Override
                         public void onAdShowedFullScreenContent() {
                             isShowingAd = true;
+                            lastAppOpenAdShownTime = System.currentTimeMillis();
                         }
                     };
 

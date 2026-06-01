@@ -57,7 +57,8 @@ public class SectionListDataAdapterForImages
                     .diskCacheStrategy(DiskCacheStrategy.ALL)
                     .priority(Priority.HIGH)
                     .centerCrop()
-                    .error(R.drawable.ic_error)
+                    .placeholder(R.drawable.ic_cat_images)
+                    .error(R.drawable.ic_cat_images)
                     .into(holder.itemImage);
         } catch (Exception e) {
             // ignore

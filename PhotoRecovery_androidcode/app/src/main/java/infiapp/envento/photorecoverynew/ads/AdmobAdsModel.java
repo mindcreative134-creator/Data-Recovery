@@ -41,8 +41,13 @@ public class AdmobAdsModel {
     String mTag = "AdmobAdsModel";
 
     // Frequency capping: show interstitial every N navigation actions
-    private static final int INTERSTITIAL_FREQUENCY = 3;
+    // AdMob policy: "more ads than content" — increased to 5 to reduce ad density
+    private static final int INTERSTITIAL_FREQUENCY = 5;
     static int navClickCount = 0;
+
+    // Minimum time gap between interstitial shows (60 seconds)
+    private static final long MIN_INTERSTITIAL_INTERVAL_MS = 60 * 1000L;
+    static long lastInterstitialShownTime = 0;
 
     // Flag used by AppOpenManager to avoid stacking App Open Ad on top of Interstitial
     public static boolean isInterstitialShowing = false;
@@ -141,8 +146,19 @@ public class AdmobAdsModel {
             return;
         }
 
+        // Time gap check: don't show interstitial if shown too recently (AdMob policy)
+        long now = System.currentTimeMillis();
+        if ((now - lastInterstitialShownTime) < MIN_INTERSTITIAL_INTERVAL_MS) {
+            Log.d(mTag, "interstitialAdShow: skipped — too soon since last ad (" + ((now - lastInterstitialShownTime) / 1000) + "s ago)");
+            if (getBackPointer != null) {
+                getBackPointer.returnAction();
+            }
+            return;
+        }
+
         if (mInterstitialAd != null) {
             isInterstitialShowing = true;
+            lastInterstitialShownTime = System.currentTimeMillis();
             mInterstitialAd.show(context);
 
             mInterstitialAd.setFullScreenContentCallback(new FullScreenContentCallback() {

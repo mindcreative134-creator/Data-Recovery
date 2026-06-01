@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Photo Recovery</string>
+    <string name="app_name">All Recovery &amp; Data Restore</string>
 
     <string name="restoring_number_format">Restored ... %d photos</string>
     <string name="restoring_number_format_Audio">Restored ... %d Audios</string>

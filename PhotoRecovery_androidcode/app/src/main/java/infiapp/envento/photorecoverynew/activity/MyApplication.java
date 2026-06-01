@@ -11,15 +11,19 @@ public class MyApplication extends Application {
     private static MyApplication mInstance;
     AppOpenManager appOpenManager;
 
+    public static boolean isAdmobInitialized = false;
+
     @Override
     public void onCreate() {
         super.onCreate();
         mInstance = this;
 
+        // Initialize MobileAds asynchronously on the main thread
         MobileAds.initialize(this, initializationStatus -> {
+            isAdmobInitialized = true;
+            // Load AppOpenManager safely only after MobileAds initialization completes
+            appOpenManager = new AppOpenManager(MyApplication.this, getString(R.string.admob_open_ads));
         });
-
-        appOpenManager = new AppOpenManager(MyApplication.this, getString(R.string.admob_open_ads));
 
     }
 

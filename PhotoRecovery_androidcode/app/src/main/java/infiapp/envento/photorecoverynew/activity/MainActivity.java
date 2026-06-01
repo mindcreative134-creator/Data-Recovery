@@ -44,9 +44,21 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onResume() {
-        // NOTE: Interstitial is loaded only in onCreate to avoid reloading on every screen return.
-        // Reloading here (onResume) caused too-frequent ad display — AdMob policy violation.
         super.onResume();
+        loadCachedCounts();
+    }
+
+    private void loadCachedCounts() {
+        android.content.SharedPreferences prefs = getSharedPreferences("data_recovery_prefs", MODE_PRIVATE);
+        Utils.noOfImage = prefs.getString("noOfImage", "0");
+        Utils.noOfVideo = prefs.getString("noOfVideo", "0");
+        Utils.noOfAudio = prefs.getString("noOfAudio", "0");
+        Utils.noOfOther = prefs.getString("noOfOther", "0");
+
+        if (totalImage != null) totalImage.setText(Utils.noOfImage + " Files");
+        if (totalVideo != null) totalVideo.setText(Utils.noOfVideo + " Files");
+        if (totalAudio != null) totalAudio.setText(Utils.noOfAudio + " Files");
+        if (totalOther != null) totalOther.setText(Utils.noOfOther + " Files");
     }
 
     @Override
@@ -54,10 +66,17 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // Load interstitial once at startup only
-        new AdmobAdsModel(this).interstitialAdLoad(this);
-        new AdmobAdsModel(this).bannerAds(this, findViewById(R.id.adsView));
-        // new AdmobAdsModel(this).nativeAds(this, findViewById(R.id.adsView));
+        // Load ads with a safety delay to prevent blocking the main thread during SDK initialization
+        new android.os.Handler().postDelayed(() -> {
+            try {
+                if (!isFinishing() && !isDestroyed()) {
+                    new AdmobAdsModel(MainActivity.this).interstitialAdLoad(MainActivity.this);
+                    new AdmobAdsModel(MainActivity.this).bannerAds(MainActivity.this, findViewById(R.id.adsView));
+                }
+            } catch (Exception e) {
+                Log.e("MainActivity", "Error loading startup ads: " + e.getMessage());
+            }
+        }, 3000);
 
         startBtn = findViewById(R.id.startBtn);
         totalImage = findViewById(R.id.totalImage);
@@ -67,6 +86,11 @@ public class MainActivity extends AppCompatActivity {
         toolBar = findViewById(R.id.toolBar);
         setSupportActionBar(toolBar);
         toolBar.inflateMenu(R.menu.toolbar_menu);
+        
+        // Make the left menu button functional - opens the settings activity
+        toolBar.setNavigationOnClickListener(v -> {
+            startActivity(new Intent(MainActivity.this, SettingActivity.class));
+        });
 
         bannerCard = findViewById(R.id.recycling);
         allImages = findViewById(R.id.allImages);
@@ -91,10 +115,7 @@ public class MainActivity extends AppCompatActivity {
             permission();
         });
 
-        totalImage.setText(Utils.noOfImage + " Files");
-        totalVideo.setText(Utils.noOfVideo + " Files");
-        totalAudio.setText(Utils.noOfAudio + " Files");
-        totalOther.setText(Utils.noOfOther + " Files");
+        loadCachedCounts();
 
         allImages.setOnClickListener(v -> {
             new AdmobAdsModel(this).interstitialAdShow(this, () -> {
@@ -161,6 +182,7 @@ public class MainActivity extends AppCompatActivity {
         navSettings.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, SettingActivity.class));
         });
+
     }
 
     @Override
@@ -208,20 +230,16 @@ public class MainActivity extends AppCompatActivity {
                 });
                 snack.show();
             } else {
-                new AdmobAdsModel(this).interstitialAdShow(this, () -> {
-                    startActivity(new Intent(MainActivity.this, ScanningActivity.class));
-
-                });
+                // Permission granted — go straight to scan (no ad before scan, AdMob policy)
+                startActivity(new Intent(MainActivity.this, ScanningActivity.class));
             }
         } else {
 
             // And finally ask for the permission
             if (checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
                 Log.v("TAG", "Permission is granted");
-                // File write logic here
-                new AdmobAdsModel(this).interstitialAdShow(this, () -> {
-                    startActivity(new Intent(MainActivity.this, ScanningActivity.class));
-                });
+                // Go straight to scan without ad — ad before scan violates AdMob policy
+                startActivity(new Intent(MainActivity.this, ScanningActivity.class));
             } else {
                 ActivityCompat.requestPermissions(this, permissions, 101);
             }

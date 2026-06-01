@@ -39,18 +39,36 @@ public class AlbumsOtherAdapter extends RecyclerView.Adapter<AlbumsOtherAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.mOtherFileSize.setText("" + albumOthers.get(position).getListOther().size() + "\nOthers");
-        holder.filePath.setText("" + albumOthers.get(position).getStrOtherFolder());
+        int count = albumOthers.get(position).getListOther().size();
+        holder.mOtherFileSize.setText(count + "\nOthers");
+        
+        // Extract folder name from directory path for clean presentation
+        String folderPath = albumOthers.get(position).getStrOtherFolder();
+        holder.filePath.setText(folderPath);
+        
+        if (folderPath != null) {
+            java.io.File file = new java.io.File(folderPath);
+            holder.tvFolderName.setText(file.getName());
+        } else {
+            holder.tvFolderName.setText("Unknown Folder");
+        }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true);
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
+        // Set sleek cyan background and dynamic other files icon
+        if (holder.mFolderIcon != null) {
+            holder.mFolderIcon.setBackgroundResource(R.drawable.bg_card_others);
+        }
+        if (holder.ivFolderIcon != null) {
+            holder.ivFolderIcon.setImageResource(R.drawable.ic_cat_others);
+        }
 
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mOtherFileSize;
         TextView filePath;
+        TextView tvFolderName;
+        android.widget.LinearLayout mFolderIcon;
+        android.widget.ImageView ivFolderIcon;
 
         OnClickItemListener onClickItemListener;
 
@@ -59,6 +77,9 @@ public class AlbumsOtherAdapter extends RecyclerView.Adapter<AlbumsOtherAdapter.
 
             mOtherFileSize = (TextView) view.findViewById(R.id.tv_folder2);
             filePath = (TextView) view.findViewById(R.id.filePath);
+            tvFolderName = (TextView) view.findViewById(R.id.tvFolderName);
+            mFolderIcon = (android.widget.LinearLayout) view.findViewById(R.id.imageLayout);
+            ivFolderIcon = (android.widget.ImageView) view.findViewById(R.id.iv_folder_icon);
             this.onClickItemListener = onClickItemListener;
             view.setOnClickListener(this);
 

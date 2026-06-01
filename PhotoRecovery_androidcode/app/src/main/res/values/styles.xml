@@ -28,7 +28,15 @@
         <item name="android:fontFamily">sans-serif-medium</item>
     </style>
 
-    <!-- Legacy -->
+    <!-- Scanning Screen Toolbar Title - light purple italic for cyberpunk vibe -->
+    <style name="ScanToolbarTitle" parent="TextAppearance.MaterialComponents.Headline6">
+        <item name="android:textColor">@color/colorPrimaryLight</item>
+        <item name="android:textSize">17sp</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:fontFamily">sans-serif-medium</item>
+    </style>
+
+
     <style name="tvTitleStyle">
         <item name="android:layout_width">wrap_content</item>
         <item name="android:layout_height">wrap_content</item>

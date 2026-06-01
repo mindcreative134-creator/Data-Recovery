@@ -32,6 +32,9 @@ public class AlbumsAudioAdapter extends RecyclerView.Adapter<AlbumsAudioAdapter.
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
         TextView mAudioFileSize;
         TextView filePath;
+        TextView tvFolderName;
+        android.widget.LinearLayout mFolderIcon;
+        android.widget.ImageView ivFolderIcon;
 
         OnClickItemListener onClickItemListener;
 
@@ -40,6 +43,9 @@ public class AlbumsAudioAdapter extends RecyclerView.Adapter<AlbumsAudioAdapter.
 
             mAudioFileSize = (TextView) view.findViewById(R.id.tv_folder2);
             filePath = (TextView) view.findViewById(R.id.filePath);
+            tvFolderName = (TextView) view.findViewById(R.id.tvFolderName);
+            mFolderIcon = (android.widget.LinearLayout) view.findViewById(R.id.imageLayout);
+            ivFolderIcon = (android.widget.ImageView) view.findViewById(R.id.iv_folder_icon);
             this.onClickItemListener = onClickItemListener;
             view.setOnClickListener(this);
 
@@ -60,12 +66,27 @@ public class AlbumsAudioAdapter extends RecyclerView.Adapter<AlbumsAudioAdapter.
 
     @Override
     public void onBindViewHolder(final MyViewHolder holder, final int position) {
-        holder.mAudioFileSize.setText("" + albumAudios.get(position).getListAudio().size() + "\nAudios");
-        holder.filePath.setText("" + albumAudios.get(position).getStrAudioFolder());
+        int count = albumAudios.get(position).getListAudio().size();
+        holder.mAudioFileSize.setText(count + "\nAudios");
+        
+        // Extract folder name from directory path for clean presentation
+        String folderPath = albumAudios.get(position).getStrAudioFolder();
+        holder.filePath.setText(folderPath);
+        
+        if (folderPath != null) {
+            java.io.File file = new java.io.File(folderPath);
+            holder.tvFolderName.setText(file.getName());
+        } else {
+            holder.tvFolderName.setText("Unknown Folder");
+        }
 
-        LinearLayoutManager layoutManager = new LinearLayoutManager(context, LinearLayoutManager.HORIZONTAL, true);
-        layoutManager.setStackFromEnd(true);
-        layoutManager.setReverseLayout(true);
+        // Set warm orange background and dynamic audio icon
+        if (holder.mFolderIcon != null) {
+            holder.mFolderIcon.setBackgroundResource(R.drawable.bg_card_audios);
+        }
+        if (holder.ivFolderIcon != null) {
+            holder.ivFolderIcon.setImageResource(R.drawable.ic_cat_audio);
+        }
 
     }
 
